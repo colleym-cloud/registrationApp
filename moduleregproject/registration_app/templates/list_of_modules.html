@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Your Custom Title{% endblock %}
+
+{% block content %}
+    <!-- Add specific content for each page here -->
+
+    <a href="{% url 'module_detail' module.id %}">View Details</a>
+{% if module.is_open %}
+    <a href="{% url 'register_module' module.id %}">Register</a>
+{% else %}
+    <a href="{% url 'unregister_module' module.id %}">Unregister</a>
+{% endif %}
+
+{% endblock %}

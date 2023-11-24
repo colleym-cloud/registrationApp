@@ -1,2 +1,5 @@
 # registrationApp
-assesment
+
+SuperUser details
+Username: 'student'
+password: 'ytrewq123'
