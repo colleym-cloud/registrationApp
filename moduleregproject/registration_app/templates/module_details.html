@@ -1,0 +1,15 @@
+<!-- registration_app/templates/module_details.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Module Details</h2>
+
+  <div class="module-details">
+    <h3>{{ module.module_code }}</h3>
+    <h4>{{ module.module_name }}</h4>
+    <p>{{ module.module_description }}</p>
+    <p>Credit: {{ module.credit }}</p>
+    <!-- Add other module details as needed -->
+  </div>
+{% endblock %}

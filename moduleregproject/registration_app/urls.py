@@ -1,6 +1,7 @@
 from django.urls import path
 from django.contrib.auth import views as auth_views
 from . import views
+from .views import list_of_modules
 
 urlpatterns = [
     path('', views.home, name='home'),
@@ -11,11 +12,9 @@ urlpatterns = [
     path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('register/', views.register_for_module, name='register'),
-    path('profile/', views.student_profile, name='student_profile'),
-    path('accounts/profile/', views.student_profile, name='student_profile'),
+    path('student_profile/', views.student_profile, name='student_profile'),
+    path('module_details/<str:module_code>/', views.module_details, name='module_details'),
+    path('list_of_modules/', list_of_modules, name='list_of_modules'),
+
     # Add more paths for other views if needed
 ]
-
-
-
-    

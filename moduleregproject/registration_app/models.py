@@ -10,6 +10,9 @@ class Module(models.Model):
     availability = models.BooleanField(default=True)
     courses_allowed = models.ManyToManyField(Group)
 
+    def __str__(self):
+        return self.name
+
 class Student(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     date_of_birth = models.DateField()
@@ -17,6 +20,9 @@ class Student(models.Model):
     city = models.CharField(max_length=100)
     country = models.CharField(max_length=100)
     photo = models.ImageField(upload_to='student_photos/', null=True, blank=True)
+
+    def __str__(self):
+        return self.user.username
 
 class Registration(models.Model):
     student = models.ForeignKey(Student, on_delete=models.CASCADE)

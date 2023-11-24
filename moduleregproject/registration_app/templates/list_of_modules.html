@@ -1,15 +1,17 @@
+<!-- registration_app/templates/list_of_modules.html -->
+
 {% extends 'base.html' %}
 
-{% block title %}Your Custom Title{% endblock %}
-
 {% block content %}
-    <!-- Add specific content for each page here -->
+  <h2>List of Modules</h2>
 
-    <a href="{% url 'module_detail' module.id %}">View Details</a>
-{% if module.is_open %}
-    <a href="{% url 'register_module' module.id %}">Register</a>
-{% else %}
-    <a href="{% url 'unregister_module' module.id %}">Unregister</a>
-{% endif %}
+  {% for module in modules %}
+    <div class="module-item">
+      <h3>{{ module.module_code }}</h3>
+      <p>{{ module.module_name }}</p>
+      <!-- Add other module details as needed -->
 
+      
+    </div>
+  {% endfor %}
 {% endblock %}
