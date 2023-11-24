@@ -49,7 +49,7 @@ def student_profile(request):
     return render(request, 'student_profile.html', {'student': student, 'registrations': registrations})
 
 @login_required
-def register_for_module(request, module_id):
+def register_for_module(request):
     student = request.user.student
 
     if request.method == 'POST':
@@ -63,7 +63,7 @@ def register_for_module(request, module_id):
     else:
         form = RegistrationForm()
 
-    return render(request, 'register_for_module.html', {'form': form})
+    return render(request, 'register.html', {'form': form})
 
 
 # views.py
@@ -86,3 +86,19 @@ def list_of_modules(request):
 def module_details(request, module_code):
     module = get_object_or_404(Module, module_code=module_code)
     return render(request, 'module_details.html', {'module': module})
+
+
+def register(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            messages.success(request, f'Your account has been created! Now you can login.')
+            return redirect('login')
+        else:
+            messages.warning(request, 'Unable to create account. Please correct the errors below.')
+    else:
+        form = UserCreationForm()
+
+    return render(request, 'register.html', {'form': form, 'title': 'Student Registration'})

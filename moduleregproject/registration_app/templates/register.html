@@ -1,14 +1,24 @@
-<!-- registration_app/templates/register.html -->
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
-
-{% block title %}Register{% endblock %}
-
 {% block content %}
-    <h2>Register</h2>
-    <form method="post" action="{% url 'register' %}">
+
+<div class="content-section ">
+
+    <form method="post">
         {% csrf_token %}
-        {{ form | crispy }}
-        <button type="submit">Register</button>
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4"> Registration Form </legend>
+
+            {{ form | crispy }}
+        </fieldset>
+        <div class="form-group">
+            <button class="btn btn-outline-info" type="submit"> Register</button>
+        </div>
     </form>
-{% endblock %}
+    <div class="border-top pt-3">
+        <small class="text-muted">Are You Already Registered?<a class="ml-2" href="{% url 'login' %}">Login</a>
+         </small>
+    </div>
+</div>
+
+{% endblock content %}

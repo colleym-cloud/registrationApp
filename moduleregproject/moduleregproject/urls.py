@@ -24,7 +24,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('registration_app.urls')),
     # Add more paths for other apps if needed
-]
+] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
 
 # Serve static files during development
 if settings.DEBUG:

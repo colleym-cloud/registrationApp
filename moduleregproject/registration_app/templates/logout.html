@@ -1,4 +1,3 @@
-<!-- registration_app/templates/logout.html -->
 {% extends 'base.html' %}
 
 {% block title %}Logout{% endblock %}
@@ -10,4 +9,7 @@
         {% csrf_token %}
         <button type="submit">Logout</button>
     </form>
+    <div class="border-top pt-3">
+        <small class="text-muted"><a class="ml-2" href="{% url 'login' %}">Login</a></small>
+    </div>
 {% endblock %}

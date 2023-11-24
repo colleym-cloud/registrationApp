@@ -1,41 +1,16 @@
-<!-- student_profile.html -->
-
 {% extends 'base.html' %}
-
 {% block content %}
-  <div class="container mt-5">
-    <h2>{{ student.user.username }}'s Profile</h2>
 
-    <!-- Display student details -->
-    <div class="row">
-      <div class="col-md-6">
-        <p><strong>Date of Birth:</strong> {{ student.date_of_birth }}</p>
-        <p><strong>Address:</strong> {{ student.address }}</p>
-        <p><strong>City:</strong> {{ student.city }}</p>
-        <p><strong>Country:</strong> {{ student.country }}</p>
-      </div>
-      <div class="col-md-6">
-        {% if student.photo %}
-          <img src="{{ student.photo.url }}" alt="{{ student.user.username }}'s photo" class="img-fluid">
-        {% endif %}
-      </div>
+{% load static %}
+<div class="content-section">
+    <div class="media">
+        <p><img class="rounded-circle acount-img" src="{{ user.profile.image.url }}"></p>
+        <div class="media-body">
+            <h2 class="acount-heading"> {{ user.profile }}</h2>
+            <p class="text-secondary"> {{ user.username }}</p>
+            <p class="text-secondary"> {{ user.email }}</p>
+        </div>
     </div>
+</div>
 
-    <!-- Display module registrations -->
-    <h3>Your Module Registrations:</h3>
-    
-    {% if registrations %}
-      <ul>
-        {% for registration in registrations %}
-          <li>{{ registration.module.name }} - {{ registration.date_of_registration }}</li>
-        {% endfor %}
-      </ul>
-    {% else %}
-      <p>No module registrations yet.</p>
-    {% endif %}
-
-    <!-- Link to register for a new module -->
-    <h3>Register for a New Module:</h3>
-    <a href="{% url 'list_of_modules' %}">Browse Modules</a>
-  </div>
-{% endblock %}
+{% endblock content %}

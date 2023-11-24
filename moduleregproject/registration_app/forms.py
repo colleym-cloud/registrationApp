@@ -21,3 +21,7 @@ class ModuleForm(forms.ModelForm):
     class Meta:
         model = Module
         fields = '__all__'
+
+class UserCreationForm(RegistrationForm):
+    email = forms.EmailField(label = 'Email address', help_text = 'Your SHU email address.')
+
