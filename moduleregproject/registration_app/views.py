@@ -1,4 +1,5 @@
 from django.shortcuts import get_object_or_404, render, redirect
+from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -7,6 +8,7 @@ from .models import Student, Registration
 from .forms import RegistrationForm
 from .models import Module
 from .forms import ModuleForm
+
 
 # Your existing views...
 
@@ -90,15 +92,22 @@ def module_details(request, module_code):
 
 def register(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = UserRegisterForm(request.POST)
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
             messages.success(request, f'Your account has been created! Now you can login.')
             return redirect('login')
         else:
-            messages.warning(request, 'Unable to create account. Please correct the errors below.')
-    else:
-        form = UserCreationForm()
+            messages.warning(request, 'Unable to create account!')
+            # Redirect to the registration page with the form data for correction
+            return redirect('register')  # Assuming 'register' is your registration URL
 
-    return render(request, 'register.html', {'form': form, 'title': 'Student Registration'})
+    else:
+        form = UserRegisterForm()
+
+    return render(request, 'registration_app/register.html', {'form': form, 'title': 'Student Registration'})
+
+@login_required
+def profile(request):
+    return render(request, 'registration_app/student_profile.html', {'title': 'Student Profile'})

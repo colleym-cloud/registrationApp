@@ -1,13 +1,13 @@
 from .models import Module
 from django.contrib import admin
 from .models import Student
-
+from .models import Profile
 
 
 # Register your models here.
 
 admin.site.register(Module)
-
+admin.site.register(Profile)
 
 @admin.register(Student)
 class StudentAdmin(admin.ModelAdmin):

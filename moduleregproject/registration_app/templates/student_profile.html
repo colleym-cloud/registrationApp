@@ -4,7 +4,12 @@
 {% load static %}
 <div class="content-section">
     <div class="media">
-        <p><img class="rounded-circle acount-img" src="{{ user.profile.image.url }}"></p>
+        {% if user.profile.photo %}
+            <p><img class="rounded-circle acount-img" src="{{ user.profile.photo.url }}" style="max-width: 200px; max-height: 200px;"></p>
+        {% else %}
+            <!-- You can provide a default image if no photo is available -->
+            <p><img class="rounded-circle acount-img" src="{% static 'path/to/default/profile.jpg' %}" style="max-width: 200px; max-height: 200px;"></p>
+        {% endif %}
         <div class="media-body">
             <h2 class="acount-heading"> {{ user.profile }}</h2>
             <p class="text-secondary"> {{ user.username }}</p>

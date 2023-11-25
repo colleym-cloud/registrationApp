@@ -13,8 +13,7 @@ class ContactForm(forms.Form):
 class RegistrationForm(forms.ModelForm):
     class Meta:
         model = Registration
-        fields = ['module']  # Add any additional fields you want in the form
-
+        fields = ['module']  
 
 
 class ModuleForm(forms.ModelForm):
