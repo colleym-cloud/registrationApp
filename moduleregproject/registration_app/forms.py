@@ -11,9 +11,12 @@ class ContactForm(forms.Form):
 
 
 class RegistrationForm(forms.ModelForm):
+    class UserRegisterForm(Registration):
+        email = forms.EmailField(label = 'Email address', help_text = 'Your SHU email address.')
+
     class Meta:
         model = Registration
-        fields = ['module']  # Add any additional fields you want in the form
+        fields = ['module', ]  # Add any additional fields you want in the form
 
 
 
