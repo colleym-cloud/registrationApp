@@ -100,9 +100,7 @@ def create_module(request):
 
     return render(request, 'create_module.html', {'form': form})
 
-def list_of_modules(request):
-    modules = Module.objects.all()
-    return render(request, 'list_of_modules.html', {'modules': modules})
+
 
 def module_details(request, module_code):
     module = get_object_or_404(Module, module_code=module_code)
