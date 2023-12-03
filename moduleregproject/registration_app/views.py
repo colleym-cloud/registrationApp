@@ -44,6 +44,25 @@ def list_of_modules(request):
 def contact_us_success(request):
     return render(request, 'contact_us_success.html')
 
+def register(request):
+    if request.method == 'POST':
+        form = RegistrationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            messages.success(request, f'Your account has been created! Now you can login.')
+            return redirect('home')
+        else:
+            messages.warning(request, 'Unable to create account!')
+            # Redirect to the registration page with the form data for correction
+            return redirect('register')  # Assuming 'register' is your registration URL
+
+    else:
+        form = RegistrationForm()
+
+    return render(request, 'register.html', {'form': form, 'title': 'Student Registration'})
+
+
 @login_required
 def student_profile(request):
     student = request.user.student
@@ -90,23 +109,6 @@ def module_details(request, module_code):
     return render(request, 'module_details.html', {'module': module})
 
 
-def register(request):
-    if request.method == 'POST':
-        form = UserRegisterForm(request.POST)
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            messages.success(request, f'Your account has been created! Now you can login.')
-            return redirect('login')
-        else:
-            messages.warning(request, 'Unable to create account!')
-            # Redirect to the registration page with the form data for correction
-            return redirect('register')  # Assuming 'register' is your registration URL
-
-    else:
-        form = UserRegisterForm()
-
-    return render(request, 'registration_app/register.html', {'form': form, 'title': 'Student Registration'})
 
 @login_required
 def profile(request):
