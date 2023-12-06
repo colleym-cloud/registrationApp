@@ -9,7 +9,3 @@ from .models import profile
 def create_profile(sender, instance, created, **kwargs):
     if created:
         profile.objects.create(user = instance)
-
-
-def ready(self):
-    from .signals import create_profile

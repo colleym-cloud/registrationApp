@@ -4,6 +4,7 @@ from django import forms
 from .models import Registration
 from .models import Module
 from django.contrib.auth.models import User
+from .models import Profile
 
 class ContactForm(forms.Form):
     name = forms.CharField(max_length=100)
@@ -30,3 +31,13 @@ class ModuleForm(forms.ModelForm):
 class UserCreationForm(RegistrationForm):
     email = forms.EmailField(label = 'Email address', help_text = 'Your SHU email address.')
 
+class UserUpdateForm(forms.ModelForm):
+    email = forms.EmailField()
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'email',]
+
+class ProfileUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['photo']

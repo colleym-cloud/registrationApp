@@ -8,6 +8,7 @@ from .models import Student, Registration
 from .forms import RegistrationForm
 from .models import Module
 from .forms import ModuleForm
+from .forms import UserUpdateForm, ProfileUpdateForm
 
 
 # Your existing views...
@@ -110,4 +111,20 @@ def module_details(request, module_code):
 
 @login_required
 def profile(request):
-    return render(request, 'registration_app/student_profile.html', {'title': 'Student Profile'})
+    if request.method == 'POST':
+        u_form = UserUpdateForm(request.POST, instance= request.user)
+        p_form = ProfileUpdateForm(request.POST, request.FILES, instance= request.user.profile)
+        
+        if u_form.is_valid and p_form.is_valid:
+            u_form.save()
+            p_form.save()
+
+            messages.success(request, 'Your Account has been successfully updated')
+
+        return redirect('profile')
+        
+    else:
+            u_form = UserUpdateForm(instance = request.user)
+            p_form = ProfileUpdateForm(instance= request.user.profile)
+            context = {'u_form': u_form, 'p_form': p_form, 'title': 'Student profile'}
+    return render(request, 'student_profile.html', context)
