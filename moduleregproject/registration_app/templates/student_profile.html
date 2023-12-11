@@ -2,32 +2,38 @@
 {% load crispy_forms_tags %}
 {% block content %}
 
-{% load static %}
+
 <div class="content-section">
     <div class="media">
-        {% if user.profile.photo %}
-            <p><img class="rounded-circle acount-img" src="{{ user.profile.photo.url }}" style="max-width: 200px; max-height: 200px;"></p>
-        {% else %}
-            <!-- You can provide a default image if no photo is available -->
-            <p><img class="rounded-circle acount-img" src="{% static 'path/to/default/profile.jpg' %}" style="max-width: 200px; max-height: 200px;"></p>
-        {% endif %}
+        <p><img class="rounded-circle account-img" src="{{user.profile.image.url}}"></p>
         <div class="media-body">
-            <h2 class="acount-heading"> {{ user.profile }}</h2>
-            <p class="text-secondary"> {{ user.username }}</p>
-            <p class="text-secondary"> {{ user.email }}</p>
+            <h2 class="account-heading">{{user.profile}}</h2>
+            <p class="text-secondary">{{user.username}}</p>
+            <p class="text-secondary">{{user.email}}</p>
         </div>
     </div>
+
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
+
         <fieldset class="form-group">
-            <legend class="border-bottom mb-4">Student Profile</legend>
-            {{ u_form|crispy }}
-            {{ p_form|crispy }}
+
+            <legend class="border-bottom mb-4">
+                Student IT Services - Profile Details
+            </legend>
+            {{ u_form|crispy}}
+            {{ p_form|crispy}}
+
         </fieldset>
+
         <div class="form-group">
-            <button class="btn btn-outline-info" type="submit">Update</button>
+            <button class="btn btn-outline-info" type="submit">
+                Update
+            </button>
         </div>
     </form>
+
 </div>
+
 
 {% endblock content %}

@@ -9,6 +9,9 @@ from .forms import RegistrationForm
 from .models import Module
 from .forms import ModuleForm
 from .forms import UserUpdateForm, ProfileUpdateForm
+from django.shortcuts import render, redirect
+
+from .forms import  UserUpdateForm, ProfileUpdateForm
 
 
 # Your existing views...
@@ -112,6 +115,8 @@ def module_details(request, module_code):
 @login_required
 def profile(request):
     if request.method == 'POST':
+        
+
         u_form = UserUpdateForm(request.POST, instance= request.user)
         p_form = ProfileUpdateForm(request.POST, request.FILES, instance= request.user.profile)
         
@@ -128,3 +133,5 @@ def profile(request):
             p_form = ProfileUpdateForm(instance= request.user.profile)
             context = {'u_form': u_form, 'p_form': p_form, 'title': 'Student profile'}
     return render(request, 'student_profile.html', context)
+
+

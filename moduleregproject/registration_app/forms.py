@@ -5,6 +5,8 @@ from .models import Registration
 from .models import Module
 from django.contrib.auth.models import User
 from .models import Profile
+from django.contrib.auth.forms import UserCreationForm
+
 
 class ContactForm(forms.Form):
     name = forms.CharField(max_length=100)
@@ -16,11 +18,13 @@ class ContactForm(forms.Form):
 class RegistrationForm(forms.ModelForm):
     first_name = forms.CharField(max_length=30)
     last_name = forms.CharField(max_length=30)
+    password1 = forms.CharField(widget=forms.PasswordInput)
+    password2 = forms.CharField(widget=forms.PasswordInput)
     module = forms.CharField(max_length=30) 
 
     class Meta:
         model = User
-        fields = ['username', 'email', 'first_name', 'last_name', 'module']
+        fields = ['username', 'email', 'first_name', 'last_name', 'password1', 'password2']
 
 
 class ModuleForm(forms.ModelForm):

@@ -3,15 +3,31 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h2>List of Modules</h2>
+'''
+<h1>Modules</h1>
+    <article class="media content-section">
+        <div class="media-body">
+            <div class="article-metadata">
+                <a class="mr-2" href="#">{{ Module.author.profile }}</a>
+                <small class="text-muted">{{ Module.courses_allowed }}</small>
+            </div>
+            <h2 class="article-title">{{ Module.code }} module {{Module.category}}</h2>
+            <p class="article-content">{{ Module.description }}</p>
+        </div>
+    </article>
+''' 
 
-  {% for module in modules %}
-    <div class="module-item">
-      <h3>{{ module.module_code }}</h3>
-      <p>{{ module.module_name }}</p>
-      <!-- Add other module details as needed -->
+<h2>List of Modules</h2>
 
-      
-    </div>
-  {% endfor %}
-{% endblock %}
+{% for module in modules %}
+  <div class="module-item">
+    <h3>{{ module.name }}</h3>
+    <p>{{ module.code }}</p>
+    <p>{{ module.credit }}</p>
+    <p class="article-content">{{ Module.description }}</p>
+
+    <!-- Add other module details as needed -->
+
+    
+  </div>
+{% endblock content %}
