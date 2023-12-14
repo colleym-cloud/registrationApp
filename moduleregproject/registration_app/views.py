@@ -73,18 +73,15 @@ def student_profile(request):
     registrations = Registration.objects.filter(student=student)
     return render(request, 'student_profile.html', {'student': student, 'registrations': registrations})
 
-@login_required
 def register_for_module(request):
-    student = request.user.student
-
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
         if form.is_valid():
             registration = form.save(commit=False)
-            registration.student = student
+            #registration.student = student
             registration.save()
             messages.success(request, 'Module registration successful.')
-            return redirect('student_profile')
+        return redirect('login')
     else:
         form = RegistrationForm()
 
