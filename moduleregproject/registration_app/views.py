@@ -104,7 +104,7 @@ def create_module(request):
 
 
 def module_details(request, module_code):
-    module = get_object_or_404(Module, module_code=module_code)
+    module = get_object_or_404(Module, code=module_code)
     return render(request, 'module_details.html', {'module': module})
 
 
