@@ -1,33 +1,17 @@
 <!-- registration_app/templates/list_of_modules.html -->
 
 {% extends 'base.html' %}
-
 {% block content %}
-'''
-<h1>Modules</h1>
+<div class="col-md-12">
+    <h1>List of Modules</h1>
+    
+    {% for module in modules %}
     <article class="media content-section">
         <div class="media-body">
-            <div class="article-metadata">
-                <a class="mr-2" href="#">{{ Module.author.profile }}</a>
-                <small class="text-muted">{{ Module.courses_allowed }}</small>
-            </div>
-            <h2 class="article-title">{{ Module.code }} module {{Module.category}}</h2>
-            <p class="article-content">{{ Module.description }}</p>
+            <h3><a class="article-title" href="{% url 'module_details' module.code %}">{{ module.name }} ({{ module.code }})</a></h3>
+            <p class="article-content">Credit: {{ module.credit }}</p>
         </div>
     </article>
-''' 
-
-<h2>List of Modules</h2>
-
-{% for module in modules %}
-  <div class="module-item">
-    <h3>{{ module.name }}</h3>
-    <p>{{ module.code }}</p>
-    <p>{{ module.credit }}</p>
-    <p class="article-content">{{ Module.description }}</p>
-
-    <!-- Add other module details as needed -->
-
-    
-  </div>
-{% endblock content %}
+    {% endfor %}
+</div>
+{% endblock %}

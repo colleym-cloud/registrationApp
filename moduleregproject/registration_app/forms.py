@@ -1,12 +1,9 @@
 # registration_app/forms.py
 from profile import Profile
 from django import forms
-from .models import Registration
 from .models import Module
 from django.contrib.auth.models import User
 from .models import Profile
-from django.contrib.auth.forms import UserCreationForm
-
 
 class ContactForm(forms.Form):
     name = forms.CharField(max_length=100)
