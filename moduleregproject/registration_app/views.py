@@ -8,11 +8,9 @@ from .models import Student, Registration
 from .forms import RegistrationForm
 from .models import Module
 from .forms import ModuleForm
-from .forms import UserUpdateForm, ProfileUpdateForm
 from django.shortcuts import render, redirect
 
-from .forms import  UserUpdateForm, ProfileUpdateForm
-
+from .forms import UserUpdateForm, ProfileUpdateForm
 
 # Your existing views...
 
@@ -71,7 +69,23 @@ def register(request):
 def student_profile(request):
     student = request.user.student
     registrations = Registration.objects.filter(student=student)
-    return render(request, 'student_profile.html', {'student': student, 'registrations': registrations})
+
+    if request.method == 'POST':
+        u_form = UserUpdateForm(request.POST, instance=request.user)
+        p_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
+        if u_form.is_valid() and p_form.is_valid():
+            u_form.save()
+            p_form.save()
+            messages.success(request, 'Your account has been successfully updated.')
+            return redirect('student_profile')
+        else:
+            messages.error(request, 'Error updating your account. Please check the form.')
+    else:
+        u_form = UserUpdateForm(instance=request.user)
+        p_form = ProfileUpdateForm(instance=request.user.profile)
+
+    return render(request, 'student_profile.html', {'student': student, 'registrations': registrations, 'u_form': u_form, 'p_form': p_form})
+
 
 def register_for_module(request):
     if request.method == 'POST':

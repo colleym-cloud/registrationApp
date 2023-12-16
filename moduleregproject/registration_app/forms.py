@@ -3,7 +3,7 @@ from profile import Profile
 from django import forms
 from .models import Module
 from django.contrib.auth.models import User
-from .models import Profile
+from .models import Student
 
 class ContactForm(forms.Form):
     name = forms.CharField(max_length=100)
@@ -17,7 +17,6 @@ class RegistrationForm(forms.ModelForm):
     last_name = forms.CharField(max_length=30)
     password1 = forms.CharField(widget=forms.PasswordInput)
     password2 = forms.CharField(widget=forms.PasswordInput)
-    module = forms.CharField(max_length=30) 
 
     class Meta:
         model = User
@@ -36,9 +35,14 @@ class UserUpdateForm(forms.ModelForm):
     email = forms.EmailField()
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'email',]
+        fields = ['first_name', 'last_name', 'email']
+        exclude = ['first_name', 'last_name', 'email',]
 
 class ProfileUpdateForm(forms.ModelForm):
+    date_of_birth = forms.DateField(
+        widget=forms.widgets.DateInput(attrs={'type': 'date'}),
+        help_text='Enter your date of birth'
+    )
     class Meta:
-        model = Profile
-        fields = ['photo']
+        model = Student
+        fields = ['date_of_birth', 'address', 'city', 'country', 'photo']
