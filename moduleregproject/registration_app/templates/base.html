@@ -54,21 +54,20 @@
                 {% block content %}{% endblock %}
             </div>
             <div class="col-md-4">
-                <div class="content-section">
-                    <h3>Browse By Courses</h3>
-                    <p class='text-muted'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.</p>
-                    <ul class="list-group">
-                        {% for group in groups %}
-                            <li class="list-group-item list-group-item-light">
-                                <a class="mr-2" href="{% url 'group_modules' group_id=group.id %}">{{ group.name }}</a>
-                            </li>
-                            <li class="list-group-item list-group-item-light">
-                                <a class="mr-2" href="{% url 'group_modules' group_id=group.id %}">{{ group.name }}</a>
-                            </li>
-                        {% endfor %}
-                    </ul>
-                </div>
+            <div class="content-section">
+                <h3>Browse By courses</h3>
+                <p class='text-muted'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio.
+                    Praesent libero. Sed cursus ante dapibus diam.</p>
+                <ul class="list-group">
+                
+                    <li class="list-group-item list-group-item-light"><a class="mr-2" href="{% url 'list_of_modules' %}"> Programming </a></li>
+                    
+                    <li class="list-group-item list-group-item-light"><a class="mr-2" href="{% url 'list_of_modules' %}"> Systems architecture</a></li>
+                    
+                    <li class="list-group-item list-group-item-light"><a class="mr-2" href="/module_details/55-506367/">Smart Technologies</a></li>
+                            </ul>
             </div>
+        </div>
         </div>
     </div>
     <footer class="footer">
