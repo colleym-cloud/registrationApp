@@ -4,6 +4,9 @@ from . import views
 from .views import list_of_modules
 from .views import module_details, register_for_module, unregister_module
 from .views import ContactFormView
+from .views import user_registered_modules, module_list_for_user
+from .views import my_registrations_view 
+from .views import group_modules
 
 
 urlpatterns = [
@@ -24,8 +27,11 @@ urlpatterns = [
     path('module/<str:module_code>/unregister/', unregister_module, name='unregister_module'),
     path('contact', ContactFormView.as_view(), name='contact'),
     path('module/<str:module_code>/register/', register_for_module, name='register_for_module'),
-
-
+    path('user_registered_modules/', user_registered_modules, name='user_registered_modules'),
+    path('module_list_for_user/<int:user_id>/', module_list_for_user, name='module_list_for_user'),
+    path('my_registrations/', my_registrations_view, name='my_registrations'),
+    path('group_modules/<int:group_id>/', group_modules, name='group_modules'), 
+   
 
     # Add more paths for other views if needed
 ]

@@ -1,0 +1,14 @@
+<!-- templates/group_modules.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container mt-5">
+    <h2>{{ group.name }} Modules</h2>
+    <ul class="list-group">
+        {% for module in modules %}
+            <li class="list-group-item">{{ module.name }} - {{ module.code }}</li>
+        {% endfor %}
+    </ul>
+  </div>
+{% endblock %}

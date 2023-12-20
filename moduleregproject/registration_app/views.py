@@ -11,12 +11,7 @@ from .forms import ModuleForm
 from .forms import UserUpdateForm, ProfileUpdateForm
 from django.core.mail import send_mail
 from django.views.generic.edit import FormView
-
-from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib import messages
-from django.contrib.auth.decorators import login_required
-from .models import Module, Student, Registration, Course
-from .forms import RegistrationForm
+from django.contrib.auth.models import Group
 
 
 # Your existing views...
@@ -218,3 +213,27 @@ def profile(request):
 
 
 
+def user_registered_modules(request):
+    user_registrations = Registration.objects.filter(user=request.user)
+    return render(request, 'my_registrations.html', {'user_registrations': user_registrations})
+
+def module_list_for_user(request, user_id):
+    user_registrations = Registration.objects.filter(user_id=user_id)
+    return render(request, 'list_of_modules.html', {'user_registrations': user_registrations})
+
+def my_registrations_view(request):
+    registrations = Registration.objects.filter(student=request.user.student)
+    user_registrations = Registration.objects.filter(student=request.user.student)
+
+    return render(request, 'my_registrations.html', {'registrations': registrations, 'user_registrations': user_registrations})
+
+def group_modules(request, group_id):
+    group = get_object_or_404(Group, pk=group_id)
+    modules = Module.objects.filter(courses_allowed=group)
+
+    context = {
+        'group': group,
+        'modules': modules,
+    }
+
+    return render(request, 'group_modules.html', context)

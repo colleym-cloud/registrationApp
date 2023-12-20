@@ -21,7 +21,7 @@
         <header class="site-header">
             <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
                 <div class="container">
-                    <a class="navbar-brand mr-4" href="#">  <img src="/home/student/registrationApp/moduleregproject/media/profile_photos/logo.png" width="30" height="30" class="d-inline-block align-top" alt="Your Logo">
+                    <a class="navbar-brand mr-4" href="#">  <img src="/media/profile_photos/logo.png" width="30" height="30" class="d-inline-block align-top">
                         Module Registration System</a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle"
                         aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
@@ -37,6 +37,7 @@
                         <!-- Navbar Right Side (you may customize this) -->
                         <div class="navbar-nav">
                             {% if user.is_authenticated %}
+                                <a class="nav-item nav-link" href="{% url 'my_registrations' %}"">Registrations</a>
                                 <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
                                 <a class="nav-item nav-link" href="{% url 'student_profile' %}">Profile</a>
                             {% else %}
@@ -54,17 +55,18 @@
             </div>
             <div class="col-md-4">
                 <div class="content-section">
-                    <h3>Browse By courses</h3>
-                    <p class='text-muted'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio.
-                        Praesent libero. Sed cursus ante dapibus diam.</p>
+                    <h3>Browse By Courses</h3>
+                    <p class='text-muted'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.</p>
                     <ul class="list-group">
-                    
-                        <li class="list-group-item list-group-item-light"><a class="mr-2" href="/module_details/55-403333/"> Programming </a></li>
-                        
-                        <li class="list-group-item list-group-item-light"><a class="mr-2" href="/module_details/55-503965/"> Systems architecture</a></li>
-                        
-                        <li class="list-group-item list-group-item-light"><a class="mr-2" href="/module_details/55-506367/">Smart Technologies</a></li>
-                                </ul>
+                        {% for group in groups %}
+                            <li class="list-group-item list-group-item-light">
+                                <a class="mr-2" href="{% url 'group_modules' group_id=group.id %}">{{ group.name }}</a>
+                            </li>
+                            <li class="list-group-item list-group-item-light">
+                                <a class="mr-2" href="{% url 'group_modules' group_id=group.id %}">{{ group.name }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
                 </div>
             </div>
         </div>
