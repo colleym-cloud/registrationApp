@@ -41,3 +41,12 @@ class Profile(models.Model):
 
     def __str__(self):
         return self.user.username
+    
+
+
+class Course(models.Model):
+    group = models.OneToOneField(Group, on_delete=models.CASCADE)
+    name = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.name

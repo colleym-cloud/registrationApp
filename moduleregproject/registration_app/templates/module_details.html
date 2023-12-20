@@ -7,13 +7,23 @@
     
     <div class="media content-section">
         <div class="media-body">
-            <h3>{{ module.name }} ({{ module.code }})</h3>
-            <p><strong>Credit:</strong> {{ module.credit }}</p>
-            <p><strong>Category:</strong> {{ module.category }}</p>
-            <p><strong>Description:</strong> {{ module.description }}</p>
-            <p><strong>Availability:</strong> {% if module.availability %} Available {% else %} Not Available {% endif %}</p>
-            <!-- Add more fields as needed -->
+            <h1>{{ module.name }} ({{ module.code }})</h1>
+  <p>Credit: {{ module.credit }}</p>
+  
+  {% if module.availability %}
+    {% if registrations.exists %}
+      <p>You are registered for this module. <a href="{% url 'unregister_module' module_code=your_module.code %}">Unregister for Module</a>
+      </p>
+    {% else %}
+      <p>You are not registered for this module. <a href="{% url 'register_module' module_code=module.code %}">Register from Module</a>
+      </p>
+    {% endif %}
+  {% else %}
+    <p>This module is closed for registration.</p>
+  {% endif %}
+           
         </div>
     </div>
 </div>
+
 {% endblock %}

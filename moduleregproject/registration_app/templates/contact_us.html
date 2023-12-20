@@ -12,6 +12,13 @@
                 <legend class="border-bottom mb-4">Module Registration - Contact Us</legend>
                 
                 {{ form|crispy }}
+                
+                {# Display form errors, if any #}
+                {% if form.errors %}
+                    <div class="alert alert-danger" role="alert">
+                        <strong>Error!</strong> Please correct the errors below.
+                    </div>
+                {% endif %}
             </fieldset>
             <div class="form-group">
                 <button class="btn btn-outline-info" type="submit">Submit</button>

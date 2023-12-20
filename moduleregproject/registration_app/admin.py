@@ -2,10 +2,11 @@ from .models import Module
 from django.contrib import admin
 from .models import Student
 from .models import Profile
-
+from .models import Registration
 
 # Register your models here.
 
+admin.site.register(Registration)
 admin.site.register(Module)
 admin.site.register(Profile)
 

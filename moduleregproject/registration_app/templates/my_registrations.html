@@ -1,0 +1,13 @@
+<!-- my_registrations.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container mt-5">
+    <h2>My Registrations</h2>
+    <ul class="list-group">
+        {% for registration in registrations %}
+            <li class="list-group-item">{{ registration.module.name }} - {{ registration.module.code }}</li>
+        {% endfor %}
+    </ul>
+  </div>
+{% endblock %}

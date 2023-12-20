@@ -2,6 +2,9 @@ from django.urls import path
 from django.contrib.auth import views as auth_views
 from . import views
 from .views import list_of_modules
+from .views import module_details, register_for_module, unregister_module
+from .views import ContactFormView
+
 
 urlpatterns = [
     path('', views.home, name='home'),
@@ -16,6 +19,16 @@ urlpatterns = [
     path('student_profile/', views.student_profile, name='student_profile'),
     path('module_details/<str:module_code>/', views.module_details, name='module_details'),
     path('list_of_modules/', list_of_modules, name='list_of_modules'),
+    path('module/<str:module_code>/', module_details, name='module_details'),
+    path('module/<str:module_code>/register/', register_for_module, name='register_module'),
+    path('module/<str:module_code>/unregister/', unregister_module, name='unregister_module'),
+    path('contact', ContactFormView.as_view(), name='contact'),
+    path('module/<str:module_code>/register/', register_for_module, name='register_for_module'),
+
+
 
     # Add more paths for other views if needed
 ]
+
+
+
